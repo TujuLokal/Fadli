@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TujuLokal - Smart Tourism Ecosystem</title>
+    <title>TujuLokal - Smart Tourism Ecosystem (Mobile Responsive)</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #059669; /* Emerald Green */
             --primary-dark: #047857;
-            --secondary: #2563EB; /* Royal Blue for Tech feel */
-            --accent: #F59E0B; /* Amber for notifications/points */
+            --secondary: #2563EB; 
+            --accent: #F59E0B; 
             --dark: #1F2937;
             --light: #F9FAFB;
             --gray: #6B7280;
@@ -33,7 +33,7 @@
             overflow-x: hidden;
         }
 
-        /* Navbar */
+        /* --- Header & Navbar --- */
         header {
             position: fixed;
             width: 100%;
@@ -46,16 +46,30 @@
             align-items: center;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap; /* Untuk Mobile */
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: var(--primary);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        /* Tombol Hamburger Mobile */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav ul {
@@ -86,7 +100,7 @@
             cursor: pointer;
         }
 
-        /* Hero & Booking System */
+        /* --- Hero Section --- */
         .hero {
             padding: 120px 5% 80px;
             background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
@@ -114,7 +128,7 @@
             margin-bottom: 40px;
         }
 
-        /* Dynamic Booking Widget */
+        /* --- Dynamic Booking Widget --- */
         .booking-widget {
             background: white;
             padding: 25px;
@@ -141,7 +155,6 @@
             display: block;
             margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .input-group select, .input-group input {
@@ -152,12 +165,6 @@
             font-size: 0.95rem;
             outline: none;
             background: #f9fafb;
-            transition: 0.3s;
-        }
-
-        .input-group select:focus {
-            border-color: var(--primary);
-            background: white;
         }
 
         .btn-search {
@@ -169,24 +176,18 @@
             font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
             margin-top: 25px;
             flex-basis: 150px;
         }
 
-        .btn-search:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        /* Section Global */
+        /* --- Global Sections --- */
         section {
             padding: 80px 5%;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .section-header h2 {
@@ -197,9 +198,10 @@
 
         .section-header p {
             color: var(--gray);
+            font-size: 0.95rem;
         }
 
-        /* Live Heatmap Simulation */
+        /* --- Live Heatmap --- */
         .heatmap-container {
             background: white;
             border-radius: 20px;
@@ -207,9 +209,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             height: 400px;
             background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
@@ -232,17 +231,17 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 0.8rem;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            font-size: 0.75rem;
+            text-align: center;
             cursor: pointer;
         }
 
-        .point-red { background: rgba(239, 68, 68, 0.7); width: 100px; height: 100px; top: 30%; left: 40%; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-        .point-yellow { background: rgba(251, 191, 36, 0.7); width: 80px; height: 80px; top: 60%; left: 60%; box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-        .point-green { background: rgba(16, 185, 129, 0.8); width: 60px; height: 60px; top: 40%; left: 75%; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+        .point-red { background: rgba(239, 68, 68, 0.7); width: 90px; height: 90px; top: 25%; left: 35%; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+        .point-yellow { background: rgba(251, 191, 36, 0.7); width: 75px; height: 75px; top: 55%; left: 50%; box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+        .point-green { background: rgba(16, 185, 129, 0.8); width: 60px; height: 60px; top: 35%; left: 75%; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
 
         @keyframes pulse {
-            70% { box-shadow: 0 0 0 20px rgba(0, 0, 0, 0); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 0, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
         }
 
@@ -250,117 +249,89 @@
             position: absolute;
             bottom: 20px;
             left: 20px;
-            background: white;
-            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 15px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             z-index: 10;
         }
 
-        .legend-item { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; font-size: 0.85rem; font-weight: 600;}
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 0.8rem; font-weight: 600;}
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
 
-        /* Features Grid */
+        /* --- Features Grid --- */
         .grid-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
 
         .feature-card {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
             border: 1px solid #f3f4f6;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover {
-            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-            border-color: var(--primary);
-            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
 
         .icon-box {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: #ecfdf5;
             color: var(--primary);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
         }
 
-        .feature-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--dark); }
-        .feature-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.6; }
-
-        /* Table Ecosystem */
-        .ecosystem-section {
-            background-color: white;
+        /* --- Ecosystem Table --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto; /* Untuk horizontal scroll di Mobile */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         .eco-table {
             width: 100%;
             border-collapse: collapse;
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            min-width: 600px; /* Lebar minimum agar tidak rusak di layar kecil */
         }
 
         .eco-table th, .eco-table td {
-            padding: 18px 25px;
+            padding: 15px 20px;
             text-align: left;
             border-bottom: 1px solid #f3f4f6;
+            font-size: 0.95rem;
         }
 
-        .eco-table th {
-            background-color: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
+        .eco-table th { background-color: var(--primary); color: white; }
+        .eco-table td:first-child { font-weight: 700; color: var(--secondary); }
 
-        .eco-table tr:hover {
-            background-color: #f9fafb;
-        }
-
-        .eco-table td:first-child {
-            font-weight: 700;
-            color: var(--secondary);
-            width: 20%;
-        }
-
-        /* Floating Geofence Notification */
+        /* --- Geofence Floating Alert --- */
         .geofence-alert {
             position: fixed;
-            bottom: -100px;
+            bottom: -150px;
             right: 20px;
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             display: flex;
             align-items: flex-start;
             gap: 15px;
             z-index: 2000;
-            transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transition: 0.5s;
             max-width: 350px;
             border-left: 5px solid var(--accent);
         }
+        .geofence-alert.show { bottom: 30px; }
 
-        .geofence-alert.show {
-            bottom: 30px;
-        }
-
-        .geo-icon {
-            font-size: 2rem;
-            color: var(--accent);
-        }
-
-        /* Modal / Popups */
+        /* --- Modal --- */
         .modal {
             display: none;
             position: fixed;
@@ -369,22 +340,115 @@
             z-index: 3000;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
-
         .modal-content {
             background: white;
-            padding: 40px;
-            border-radius: 20px;
-            max-width: 500px;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 450px;
             text-align: center;
+            width: 100%;
         }
-
-        .modal-content h3 { color: var(--dark); margin-bottom: 15px;}
         .modal-btn {
             background: var(--primary);
-            color: white; border: none; padding: 10px 25px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold;
+            color: white; border: none; padding: 10px 25px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%;
         }
 
+
+        /* =========================================
+           MEDIA QUERIES (MOBILE RESPONSIVE RULES)
+           ========================================= */
+        @media (max-width: 768px) {
+            
+            /* Navbar & Hamburger Menu */
+            .menu-toggle {
+                display: block; /* Munculkan Ikon Hamburger */
+            }
+
+            nav {
+                display: none; /* Sembunyikan menu secara default di mobile */
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            nav.active {
+                display: flex;
+                flex-direction: column;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                gap: 15px;
+            }
+
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .lang-currency {
+                margin-top: 10px;
+            }
+
+            /* Hero Section */
+            .hero {
+                padding: 100px 5% 50px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            /* Booking Widget di-Stack ke bawah */
+            .booking-widget {
+                flex-direction: column;
+                padding: 20px;
+                gap: 10px;
+            }
+            .input-group {
+                width: 100%;
+            }
+            .btn-search {
+                margin-top: 10px;
+                width: 100%;
+                flex-basis: 10px;
+            }
+
+            /* Sections & Typography */
+            section {
+                padding: 50px 5%;
+            }
+            .section-header h2 {
+                font-size: 1.6rem;
+            }
+
+            /* Heatmap ukuran disesuaikan untuk HP */
+            .heatmap-container {
+                height: 300px;
+            }
+            .point-red { width: 70px; height: 70px; font-size: 0.6rem; top: 15%; left: 25%; }
+            .point-yellow { width: 60px; height: 60px; font-size: 0.6rem; top: 60%; left: 35%; }
+            .point-green { width: 55px; height: 55px; font-size: 0.6rem; top: 40%; left: 65%; }
+
+            /* Geofencing ditengah layar bawah */
+            .geofence-alert {
+                right: 5%;
+                left: 5%;
+                width: 90%;
+                max-width: none;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -392,12 +456,18 @@
     <!-- Header -->
     <header>
         <a href="#" class="logo"><i class="fas fa-map-location-dot"></i> TujuLokal</a>
-        <nav>
+        
+        <!-- Hamburger Icon for Mobile -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <nav id="nav-menu">
             <ul>
-                <li><a href="#booking">Dynamic Ticketing</a></li>
-                <li><a href="#heatmap">Live Crowd Map</a></li>
-                <li><a href="#fitur">Fitur Turis</a></li>
-                <li><a href="#ekosistem">Ekosistem Platform</a></li>
+                <li><a href="#booking" onclick="toggleMenu()">Dynamic Ticketing</a></li>
+                <li><a href="#heatmap" onclick="toggleMenu()">Live Crowd Map</a></li>
+                <li><a href="#fitur" onclick="toggleMenu()">Fitur Turis</a></li>
+                <li><a href="#ekosistem" onclick="toggleMenu()">Ekosistem Platform</a></li>
                 <li class="lang-currency"><i class="fas fa-globe"></i> ID/IDR</li>
             </ul>
         </nav>
@@ -422,10 +492,10 @@
             </div>
             <div class="input-group">
                 <label>Jam Kunjung (Time-Slot)</label>
-                <select id="timeslot" onchange="checkPrice()">
-                    <option value="pagi">08:00 - 11:00 (Jam Sibuk / Padat)</option>
+                <select id="timeslot">
+                    <option value="pagi">08:00 - 11:00 (Jam Padat)</option>
                     <option value="siang">12:00 - 15:00 (Normal)</option>
-                    <option value="sore">15:00 - 18:00 (Sepi / Diskon)</option>
+                    <option value="sore">15:00 - 18:00 (Diskon UMKM)</option>
                 </select>
             </div>
             <button class="btn-search" onclick="bookTicket()">Cek Harga</button>
@@ -436,7 +506,7 @@
     <section id="heatmap">
         <div class="section-header">
             <h2>Live Crowd Heatmap 📡</h2>
-            <p>Pantau kepadatan destinasi secara real-time. Hindari area merah, tuju area hijau untuk diskon kilat UMKM.</p>
+            <p>Pantau kepadatan destinasi secara real-time. Hindari area merah, tuju area hijau untuk diskon kilat.</p>
         </div>
 
         <div class="heatmap-container">
@@ -453,9 +523,9 @@
             </div>
 
             <div class="heatmap-legend">
-                <div class="legend-item"><div class="dot" style="background: var(--red);"></div> Merah: Padat (Hindari)</div>
-                <div class="legend-item"><div class="dot" style="background: var(--yellow);"></div> Kuning: Sedang</div>
-                <div class="legend-item"><div class="dot" style="background: var(--green);"></div> Hijau: Sepi (Harga Turun)</div>
+                <div class="legend-item"><div class="dot" style="background: var(--red);"></div> Padat</div>
+                <div class="legend-item"><div class="dot" style="background: var(--yellow);"></div> Sedang</div>
+                <div class="legend-item"><div class="dot" style="background: var(--green);"></div> Sepi (Promo)</div>
             </div>
         </div>
     </section>
@@ -471,74 +541,67 @@
             <div class="feature-card">
                 <div class="icon-box"><i class="fas fa-passport"></i></div>
                 <h3>Digital Tourist Passport</h3>
-                <p>Sistem paspor digital otomatis mengumpulkan stamp setiap kali Anda bertransaksi QRIS di UMKM terdaftar.</p>
+                <p>Kumpulkan stamp setiap bertransaksi QRIS di UMKM terdaftar.</p>
             </div>
             <div class="feature-card">
                 <div class="icon-box"><i class="fas fa-route"></i></div>
                 <h3>Smart Itinerary & Bundling</h3>
-                <p>AI membuatkan rute kombinasi: Tiket Utama + Tempat Alternatif Sepi + Voucher Makan UMKM dalam 1 paket hemat.</p>
+                <p>AI membuatkan rute kombinasi Tiket + Tempat Sepi + Voucher Makan.</p>
             </div>
             <div class="feature-card">
                 <div class="icon-box"><i class="fas fa-bolt"></i></div>
                 <h3>Fast-Track Redemption</h3>
-                <p>Tukar poin stamp dari UMKM lokal menjadi akses jalur khusus bebas antre di destinasi wisata utama.</p>
+                <p>Tukar poin stamp dari UMKM menjadi akses bebas antre wisata utama.</p>
             </div>
             <div class="feature-card">
                 <div class="icon-box"><i class="fas fa-qrcode"></i></div>
                 <h3>Offline Access QR</h3>
-                <p>Tiket masuk dan QR paspor stamp Anda tetap bisa di-scan tanpa sinyal internet. Ideal untuk wisata alam.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon-box"><i class="fas fa-star-half-stroke"></i></div>
-                <h3>Verified Review System</h3>
-                <p>Hanya pengunjung yang terbukti check-in dan transaksi yang dapat memberikan ulasan, menjamin review 100% asli.</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon-box"><i class="fas fa-triangle-exclamation"></i></div>
-                <h3>Emergency & Crowdsource Alert</h3>
-                <p>Terima notifikasi cuaca buruk, penutupan rute, dan info keramaian langsung dari sesama pengunjung di lokasi.</p>
+                <p>Tiket dan QR paspor tetap bisa di-scan tanpa sinyal internet.</p>
             </div>
         </div>
     </section>
 
-    <!-- Table Ekosistem Platform -->
-    <section id="ekosistem" class="ecosystem-section">
+    <!-- Table Ekosistem Platform (Dengan Scroll Horizontal) -->
+    <section id="ekosistem" style="background-color: var(--light);">
         <div class="section-header">
             <h2>Peran Ekosistem Platform</h2>
-            <p>Bukan sekadar B2C, TujuLokal menghubungkan seluruh pemangku kepentingan secara real-time.</p>
+            <p>Geser tabel ke kiri-kanan untuk melihat detail di layar sentuh (mobile).</p>
         </div>
 
-        <table class="eco-table">
-            <thead>
-                <tr>
-                    <th>Pihak</th>
-                    <th>Aksi Utama di Platform</th>
-                    <th>Dampak Langsung</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Wisatawan</td>
-                    <td>Beli tiket jam kunjung & scan QR di UMKM.</td>
-                    <td>Bebas antre, hemat biaya, dapat poin/stamp.</td>
-                </tr>
-                <tr>
-                    <td>Pengelola Wisata</td>
-                    <td>Atur kuota jam kunjung (Capacity Manager) & pantau kapasitas.</td>
-                    <td>Destinasi terawat, tidak ada penumpukan turis.</td>
-                </tr>
-                <tr>
-                    <td>Mitra UMKM</td>
-                    <td>Terima voucher & kirim promo diskon kilat (Flash Sale) saat sepi.</td>
-                    <td>Penjualan naik drastis dari limpahan turis.</td>
-                </tr>
-                <tr>
-                    <td>Dinas Pariwisata (Gov)</td>
-                    <td>Pantau Dashboard Pergerakan (Crowd Movement & Economic Impact).</td>
-                    <td>Kebijakan pariwisata lebih terukur dan presisi berbasis data.</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Wrapper Table Responsive -->
+        <div class="table-responsive">
+            <table class="eco-table">
+                <thead>
+                    <tr>
+                        <th>Pihak</th>
+                        <th>Aksi Utama di Platform</th>
+                        <th>Dampak Langsung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Wisatawan</td>
+                        <td>Beli tiket jam kunjung & scan QR di UMKM.</td>
+                        <td>Bebas antre, hemat biaya, dapat poin/stamp.</td>
+                    </tr>
+                    <tr>
+                        <td>Pengelola Wisata</td>
+                        <td>Atur kuota jam kunjung & pantau kapasitas.</td>
+                        <td>Destinasi terawat, tidak ada penumpukan turis.</td>
+                    </tr>
+                    <tr>
+                        <td>Mitra UMKM</td>
+                        <td>Terima voucher & kirim promo diskon kilat.</td>
+                        <td>Penjualan naik drastis dari limpahan turis.</td>
+                    </tr>
+                    <tr>
+                        <td>Dinas (Gov)</td>
+                        <td>Pantau Dashboard Pergerakan & Ekonomi.</td>
+                        <td>Kebijakan pariwisata lebih terukur dan presisi.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
     <!-- Floating Notifikasi Geofencing -->
@@ -546,7 +609,7 @@
         <div class="geo-icon"><i class="fas fa-map-marker-alt"></i></div>
         <div>
             <h4 style="margin-bottom: 5px; color: var(--dark);">Geofencing Alert!</h4>
-            <p style="font-size: 0.85rem; color: var(--gray);">Kamu berada 100m dari <strong>Warung Bu Siti</strong>. Mampir sekarang, klaim diskon 20% & dapatkan 1 Poin Stamp!</p>
+            <p style="font-size: 0.85rem; color: var(--gray);">Kamu berada 100m dari <strong>Warung Bu Siti</strong>. Klaim diskon 20% & dapat 1 Stamp!</p>
         </div>
     </div>
 
@@ -554,34 +617,35 @@
     <div class="modal" id="systemModal">
         <div class="modal-content">
             <h3><i class="fas fa-robot" style="color: var(--primary);"></i> Sistem TujuLokal</h3>
-            <p id="modalMsg" style="color: var(--gray); line-height: 1.5;"></p>
+            <p id="modalMsg" style="color: var(--gray); line-height: 1.5; font-size: 0.95rem; margin-top:10px;"></p>
             <button class="modal-btn" onclick="closeModal()">Mengerti</button>
         </div>
     </div>
 
-    <!-- Script Logika Presentasi -->
+    <!-- Script JavaScript -->
     <script>
-        // Simulasi Dynamic Time-Slot Ticketing
-        function checkPrice() {
-            // Animasi visual pada form (opsional)
+        // Fitur Hamburger Menu (Mobile)
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('active');
         }
 
+        // Simulasi Dynamic Ticketing
         function bookTicket() {
             const time = document.getElementById('timeslot').value;
             let msg = "";
 
             if(time === 'pagi') {
-                msg = "⚠️ Peringatan Kepadatan!\nJam 08:00 - 11:00 terdeteksi SANGAT PADAT. Harga tiket diterapkan normal (Rp 75.000). Apakah Anda ingin pindah ke jam 15:00 untuk mendapat potongan 30%?";
+                msg = "⚠️ Jam 08:00 - 11:00 terdeteksi SANGAT PADAT. Harga tiket Rp 75.000. Pindah ke jam 15:00 untuk mendapat potongan 30%?";
             } else if (time === 'siang') {
-                msg = "✅ Kapasitas Sedang.\nHarga tiket Rp 50.000. Tersedia opsi Bundling dengan Voucher Makan UMKM seharga Rp 65.000 (Rekomendasi AI).";
+                msg = "✅ Kapasitas Sedang (Rp 50.000). Tersedia opsi Bundling dengan Voucher Makan UMKM seharga Rp 65.000 (Rekomendasi AI).";
             } else {
-                msg = "🎉 Harga Spesial!\nJam 15:00 - 18:00 pengunjung sepi. Anda mendapat potongan harga menjadi Rp 35.000. Sisa kuota (Capacity Manager): 250 orang.";
+                msg = "🎉 Harga Spesial! Pengunjung sepi. Anda mendapat potongan harga menjadi Rp 35.000. Sisa kuota: 250 orang.";
             }
-
             showModal(msg);
         }
 
-        // Modal Handler
+        // Modal Pop-up
         function showModal(text) {
             document.getElementById('modalMsg').innerText = text;
             document.getElementById('systemModal').style.display = 'flex';
@@ -591,10 +655,13 @@
             document.getElementById('systemModal').style.display = 'none';
         }
 
-        // Simulasi Geofencing & Push Notification muncul setelah 5 detik scroll
+        // Munculkan notifikasi Geofencing ketika scroll ke bawah
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 500) {
+            if (window.scrollY > 400) {
                 document.getElementById('geofence').classList.add('show');
+            } else {
+                // Opsional: Sembunyikan lagi saat scroll ke atas
+                // document.getElementById('geofence').classList.remove('show');
             }
         });
     </script>
