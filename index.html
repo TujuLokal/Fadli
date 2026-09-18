@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #059669; /* Emerald Green */
+            --primary: #059669;
             --primary-dark: #047857;
             --secondary: #2563EB; 
             --accent: #F59E0B; 
@@ -27,11 +27,36 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
+        /* Smooth scroll untuk navigasi anchor link */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--light);
             color: var(--dark);
             overflow-x: hidden;
         }
+
+        /* --- Animasi Sliding CSS --- */
+        .slide-hidden {
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .slide-up { transform: translateY(60px); }
+        .slide-left { transform: translateX(-60px); }
+        .slide-right { transform: translateX(60px); }
+        
+        .slide-visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0);
+        }
+
+        /* Delay stagger untuk elemen grid/berurutan */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
 
         /* --- Header & Navbar --- */
         header {
@@ -46,7 +71,7 @@
             align-items: center;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            flex-wrap: wrap; /* Untuk Mobile */
+            flex-wrap: wrap; 
         }
 
         .logo {
@@ -59,7 +84,6 @@
             gap: 10px;
         }
 
-        /* Tombol Hamburger Mobile */
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
@@ -178,6 +202,11 @@
             cursor: pointer;
             margin-top: 25px;
             flex-basis: 150px;
+            transition: transform 0.2s;
+        }
+
+        .btn-search:hover {
+            transform: scale(1.05);
         }
 
         /* --- Global Sections --- */
@@ -272,6 +301,12 @@
             border-radius: 15px;
             border: 1px solid #f3f4f6;
             box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
         }
 
         .icon-box {
@@ -287,30 +322,115 @@
             margin-bottom: 15px;
         }
 
-        /* --- Ecosystem Table --- */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto; /* Untuk horizontal scroll di Mobile */
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        /* --- Destinasi Cards --- */
+        .grid-destinasi {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .eco-table {
-            width: 100%;
-            border-collapse: collapse;
+        .dest-card {
             background: white;
-            min-width: 600px; /* Lebar minimum agar tidak rusak di layar kecil */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: transform 0.3s;
         }
 
-        .eco-table th, .eco-table td {
-            padding: 15px 20px;
-            text-align: left;
-            border-bottom: 1px solid #f3f4f6;
-            font-size: 0.95rem;
+        .dest-card:hover {
+            transform: translateY(-8px);
         }
 
-        .eco-table th { background-color: var(--primary); color: white; }
-        .eco-table td:first-child { font-weight: 700; color: var(--secondary); }
+        .dest-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+        .badge-green { background: rgba(16, 185, 129, 0.9); }
+        .badge-yellow { background: rgba(245, 158, 11, 0.9); }
+        .badge-red { background: rgba(239, 68, 68, 0.9); }
+
+        .dest-content {
+            padding: 25px;
+        }
+
+        .dest-content h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .dest-location {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .dest-divider {
+            border: 0;
+            height: 1px;
+            background: #f3f4f6;
+            margin: 15px 0;
+        }
+
+        .dest-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-strike {
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-bottom: -3px;
+        }
+
+        .price-now {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .price-normal {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .warning-text {
+            font-size: 0.85rem;
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .btn-book {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-book:hover { background: var(--primary-dark); }
+        .btn-book.outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-book.outline:hover { background: var(--primary); color: white; }
+        .btn-book.disabled { background: #e5e7eb; color: #9ca3af; cursor: not-allowed; }
 
         /* --- Geofence Floating Alert --- */
         .geofence-alert {
@@ -349,25 +469,26 @@
             max-width: 450px;
             text-align: center;
             width: 100%;
+            animation: modalFadeIn 0.3s ease-out;
         }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         .modal-btn {
             background: var(--primary);
             color: white; border: none; padding: 10px 25px; border-radius: 8px; margin-top: 20px; cursor: pointer; font-weight: bold; width: 100%;
         }
 
 
-        /* =========================================
-           MEDIA QUERIES (MOBILE RESPONSIVE RULES)
-           ========================================= */
+        /* --- MEDIA QUERIES --- */
         @media (max-width: 768px) {
-            
-            /* Navbar & Hamburger Menu */
-            .menu-toggle {
-                display: block; /* Munculkan Ikon Hamburger */
-            }
+            .menu-toggle { display: block; }
 
             nav {
-                display: none; /* Sembunyikan menu secara default di mobile */
+                display: none;
                 width: 100%;
                 margin-top: 15px;
             }
@@ -381,73 +502,27 @@
                 box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             }
 
-            nav ul {
-                flex-direction: column;
-                width: 100%;
-                gap: 15px;
-            }
+            nav ul { flex-direction: column; width: 100%; gap: 15px; }
+            nav ul li { width: 100%; text-align: center; }
+            .lang-currency { margin-top: 10px; }
 
-            nav ul li {
-                width: 100%;
-                text-align: center;
-            }
+            .hero { padding: 100px 5% 50px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 0.95rem; }
 
-            .lang-currency {
-                margin-top: 10px;
-            }
+            .booking-widget { flex-direction: column; padding: 20px; gap: 10px; }
+            .input-group { width: 100%; }
+            .btn-search { margin-top: 10px; width: 100%; flex-basis: 10px; }
 
-            /* Hero Section */
-            .hero {
-                padding: 100px 5% 50px;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .hero p {
-                font-size: 0.95rem;
-            }
+            section { padding: 50px 5%; }
+            .section-header h2 { font-size: 1.6rem; }
 
-            /* Booking Widget di-Stack ke bawah */
-            .booking-widget {
-                flex-direction: column;
-                padding: 20px;
-                gap: 10px;
-            }
-            .input-group {
-                width: 100%;
-            }
-            .btn-search {
-                margin-top: 10px;
-                width: 100%;
-                flex-basis: 10px;
-            }
-
-            /* Sections & Typography */
-            section {
-                padding: 50px 5%;
-            }
-            .section-header h2 {
-                font-size: 1.6rem;
-            }
-
-            /* Heatmap ukuran disesuaikan untuk HP */
-            .heatmap-container {
-                height: 300px;
-            }
+            .heatmap-container { height: 300px; }
             .point-red { width: 70px; height: 70px; font-size: 0.6rem; top: 15%; left: 25%; }
             .point-yellow { width: 60px; height: 60px; font-size: 0.6rem; top: 60%; left: 35%; }
             .point-green { width: 55px; height: 55px; font-size: 0.6rem; top: 40%; left: 65%; }
 
-            /* Geofencing ditengah layar bawah */
-            .geofence-alert {
-                right: 5%;
-                left: 5%;
-                width: 90%;
-                max-width: none;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
+            .geofence-alert { right: 5%; left: 5%; width: 90%; max-width: none; flex-direction: column; align-items: center; text-align: center; }
         }
     </style>
 </head>
@@ -456,18 +531,15 @@
     <!-- Header -->
     <header>
         <a href="#" class="logo"><i class="fas fa-map-location-dot"></i> TujuLokal</a>
-        
-        <!-- Hamburger Icon for Mobile -->
         <div class="menu-toggle" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </div>
-
         <nav id="nav-menu">
             <ul>
                 <li><a href="#booking" onclick="toggleMenu()">Dynamic Ticketing</a></li>
                 <li><a href="#heatmap" onclick="toggleMenu()">Live Crowd Map</a></li>
-                <li><a href="#fitur" onclick="toggleMenu()">Fitur Turis</a></li>
-                <li><a href="#ekosistem" onclick="toggleMenu()">Ekosistem Platform</a></li>
+                <li><a href="#fitur" onclick="toggleMenu()">Tourist Benefits</a></li>
+                <li><a href="#rekomendasi" onclick="toggleMenu()">Recomendation</a></li>
                 <li class="lang-currency"><i class="fas fa-globe"></i> ID/IDR</li>
             </ul>
         </nav>
@@ -475,10 +547,10 @@
 
     <!-- Hero & Dynamic Time-Slot Ticketing -->
     <section id="booking" class="hero">
-        <h1>Pariwisata Pintar, <span>Ekonomi Merata</span></h1>
-        <p>Platform terintegrasi pertama yang mengatur lalu lintas wisata. Dapatkan harga lebih murah di jam sepi, dan kumpulkan poin stamp dari UMKM lokal.</p>
+        <h1 class="slide-hidden slide-up">Pariwisata Pintar, <span>Ekonomi Merata</span></h1>
+        <p class="slide-hidden slide-up delay-100">Platform terintegrasi pertama yang mengatur lalu lintas wisata. Dapatkan harga lebih murah di jam sepi, dan kumpulkan poin stamp dari UMKM lokal.</p>
         
-        <div class="booking-widget">
+        <div class="booking-widget slide-hidden slide-up delay-200">
             <div class="input-group">
                 <label>Destinasi Utama</label>
                 <select id="destinasi">
@@ -504,12 +576,12 @@
 
     <!-- Live Crowd Heatmap -->
     <section id="heatmap">
-        <div class="section-header">
+        <div class="section-header slide-hidden slide-up">
             <h2>Live Crowd Heatmap 📡</h2>
             <p>Pantau kepadatan destinasi secara real-time. Hindari area merah, tuju area hijau untuk diskon kilat.</p>
         </div>
 
-        <div class="heatmap-container">
+        <div class="heatmap-container slide-hidden slide-up delay-100">
             <div class="heatmap-overlay"></div>
             
             <div class="pulse-point point-red" onclick="showModal('Area Zona 1 Sangat Padat. Sistem menyarankan pengalihan rute. Harga tiket +20%.')">
@@ -519,41 +591,41 @@
                 Sedang
             </div>
             <div class="pulse-point point-green" onclick="showModal('Area UMKM Candi Mendut Sepi. Tersedia Flash Sale & Voucher Bundling!')">
-                Sepi (Promo)
+                Sepi
             </div>
 
             <div class="heatmap-legend">
                 <div class="legend-item"><div class="dot" style="background: var(--red);"></div> Padat</div>
                 <div class="legend-item"><div class="dot" style="background: var(--yellow);"></div> Sedang</div>
-                <div class="legend-item"><div class="dot" style="background: var(--green);"></div> Sepi (Promo)</div>
+                <div class="legend-item"><div class="dot" style="background: var(--green);"></div> Sepi</div>
             </div>
         </div>
     </section>
 
     <!-- Fitur Wisatawan (Grid) -->
     <section id="fitur" style="background: white;">
-        <div class="section-header">
-            <h2>Fitur Wisatawan (Tourist Apps)</h2>
+        <div class="section-header slide-hidden slide-up">
+            <h2>Tourist Benefits</h2>
             <p>Berbagai kemudahan dalam satu genggaman, bahkan saat tanpa sinyal internet.</p>
         </div>
 
         <div class="grid-features">
-            <div class="feature-card">
+            <div class="feature-card slide-hidden slide-up delay-100">
                 <div class="icon-box"><i class="fas fa-passport"></i></div>
                 <h3>Digital Tourist Passport</h3>
                 <p>Kumpulkan stamp setiap bertransaksi QRIS di UMKM terdaftar.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card slide-hidden slide-up delay-200">
                 <div class="icon-box"><i class="fas fa-route"></i></div>
                 <h3>Smart Itinerary & Bundling</h3>
                 <p>AI membuatkan rute kombinasi Tiket + Tempat Sepi + Voucher Makan.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card slide-hidden slide-up delay-300">
                 <div class="icon-box"><i class="fas fa-bolt"></i></div>
                 <h3>Fast-Track Redemption</h3>
                 <p>Tukar poin stamp dari UMKM menjadi akses bebas antre wisata utama.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card slide-hidden slide-up delay-400">
                 <div class="icon-box"><i class="fas fa-qrcode"></i></div>
                 <h3>Offline Access QR</h3>
                 <p>Tiket dan QR paspor tetap bisa di-scan tanpa sinyal internet.</p>
@@ -561,46 +633,68 @@
         </div>
     </section>
 
-    <!-- Table Ekosistem Platform (Dengan Scroll Horizontal) -->
-    <section id="ekosistem" style="background-color: var(--light);">
-        <div class="section-header">
-            <h2>Peran Ekosistem Platform</h2>
-            <p>Geser tabel ke kiri-kanan untuk melihat detail di layar sentuh (mobile).</p>
+    <!-- Rekomendasi Destinasi (Pengganti Tabel Ekosistem) -->
+    <section id="rekomendasi">
+        <div class="section-header slide-hidden slide-up">
+            <h2>Rekomendasi Spesial 🌟</h2>
+            <p>Pilihan destinasi terbaik saat ini. Tuju area hijau untuk menghindari antrean dan nikmati diskon UMKM.</p>
         </div>
 
-        <!-- Wrapper Table Responsive -->
-        <div class="table-responsive">
-            <table class="eco-table">
-                <thead>
-                    <tr>
-                        <th>Pihak</th>
-                        <th>Aksi Utama di Platform</th>
-                        <th>Dampak Langsung</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Wisatawan</td>
-                        <td>Beli tiket jam kunjung & scan QR di UMKM.</td>
-                        <td>Bebas antre, hemat biaya, dapat poin/stamp.</td>
-                    </tr>
-                    <tr>
-                        <td>Pengelola Wisata</td>
-                        <td>Atur kuota jam kunjung & pantau kapasitas.</td>
-                        <td>Destinasi terawat, tidak ada penumpukan turis.</td>
-                    </tr>
-                    <tr>
-                        <td>Mitra UMKM</td>
-                        <td>Terima voucher & kirim promo diskon kilat.</td>
-                        <td>Penjualan naik drastis dari limpahan turis.</td>
-                    </tr>
-                    <tr>
-                        <td>Dinas (Gov)</td>
-                        <td>Pantau Dashboard Pergerakan & Ekonomi.</td>
-                        <td>Kebijakan pariwisata lebih terukur dan presisi.</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="grid-destinasi">
+            <!-- Card 1 (Sepi) -->
+            <div class="dest-card slide-hidden slide-up delay-100">
+                <div class="dest-image" style="background-image: url('https://statik.tempo.co/data/2018/05/28/id_708580/708580_720.jpg');">
+                    <span class="status-badge badge-green"><i class="fas fa-leaf"></i> Sepi (Diskon 30%)</span>
+                </div>
+                <div class="dest-content">
+                    <h3>Candi Mendut & Pawon</h3>
+                    <p class="dest-location"><i class="fas fa-map-marker-alt"></i> Magelang, Jawa Tengah</p>
+                    <hr class="dest-divider">
+                    <div class="dest-action">
+                        <div>
+                            <p class="price-strike">Rp 50.000</p>
+                            <p class="price-now">Rp 35.000</p>
+                        </div>
+                        <button class="btn-book">Ambil Promo</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 (Sedang) -->
+            <div class="dest-card slide-hidden slide-up delay-200">
+                <div class="dest-image" style="background-image: url('https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=600&q=80');">
+                    <span class="status-badge badge-yellow"><i class="fas fa-users"></i> Sedang (Normal)</span>
+                </div>
+                <div class="dest-content">
+                    <h3>Kawasan Gunung Bromo</h3>
+                    <p class="dest-location"><i class="fas fa-map-marker-alt"></i> Probolinggo, Jawa Timur</p>
+                    <hr class="dest-divider">
+                    <div class="dest-action">
+                        <div>
+                            <p class="price-normal">Rp 35.000</p>
+                        </div>
+                        <button class="btn-book outline">Beli Tiket</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 (Padat) -->
+            <div class="dest-card slide-hidden slide-up delay-300">
+                <div class="dest-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw6wBYRKsY7kABOgbLtk5b5YqPCJj9lRhGuSOpYTJ-jg&s=10');">
+                    <span class="status-badge badge-red"><i class="fas fa-exclamation-triangle"></i> Sangat Padat</span>
+                </div>
+                <div class="dest-content">
+                    <h3>Malioboro Area</h3>
+                    <p class="dest-location"><i class="fas fa-map-marker-alt"></i> Yogyakarta</p>
+                    <hr class="dest-divider">
+                    <div class="dest-action">
+                        <div>
+                            <p class="warning-text">Saran: Geser ke jam 19.00</p>
+                        </div>
+                        <button class="btn-book disabled" disabled>Kuota Penuh</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -624,17 +718,16 @@
 
     <!-- Script JavaScript -->
     <script>
-        // Fitur Hamburger Menu (Mobile)
+        // Fitur Hamburger Menu
         function toggleMenu() {
             const nav = document.getElementById('nav-menu');
             nav.classList.toggle('active');
         }
 
-        // Simulasi Dynamic Ticketing
+        // Simulasi Ticketing
         function bookTicket() {
             const time = document.getElementById('timeslot').value;
             let msg = "";
-
             if(time === 'pagi') {
                 msg = "⚠️ Jam 08:00 - 11:00 terdeteksi SANGAT PADAT. Harga tiket Rp 75.000. Pindah ke jam 15:00 untuk mendapat potongan 30%?";
             } else if (time === 'siang') {
@@ -645,7 +738,7 @@
             showModal(msg);
         }
 
-        // Modal Pop-up
+        // Modal
         function showModal(text) {
             document.getElementById('modalMsg').innerText = text;
             document.getElementById('systemModal').style.display = 'flex';
@@ -655,14 +748,34 @@
             document.getElementById('systemModal').style.display = 'none';
         }
 
-        // Munculkan notifikasi Geofencing ketika scroll ke bawah
+        // Geofencing Scroll Notification
         window.addEventListener('scroll', function() {
             if (window.scrollY > 400) {
                 document.getElementById('geofence').classList.add('show');
-            } else {
-                // Opsional: Sembunyikan lagi saat scroll ke atas
-                // document.getElementById('geofence').classList.remove('show');
             }
+        });
+
+        // ==========================================
+        // INTERSECTION OBSERVER UNTUK ANIMASI SLIDE
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Animasi terpicu jika 15% bagian elemen terlihat
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('slide-visible');
+                        observer.unobserve(entry.target); // Hentikan observasi setelah animasi berjalan sekali
+                    }
+                });
+            }, observerOptions);
+
+            const slideElements = document.querySelectorAll('.slide-hidden');
+            slideElements.forEach(el => observer.observe(el));
         });
     </script>
 </body>
